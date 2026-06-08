@@ -1,0 +1,17 @@
+{
+  "name": "claude-t3-devkit",
+  "owner": {
+    "name": "Devin Phat",
+    "email": "devin.phat97@gmail.com"
+  },
+  "description": "Marketplace hosting the claude-t3-devkit plugin for T3 / TypeScript monorepos.",
+  "plugins": [
+    {
+      "name": "claude-t3-devkit",
+      "source": "./claude-t3-devkit",
+      "description": "Workflow skills, agents, and commands for T3 / TypeScript monorepos: subagent orchestration, code-todo handoffs, and a ship workflow.",
+      "version": "0.1.0",
+      "keywords": ["t3", "typescript", "turborepo", "monorepo", "subagents", "workflow"]
+    }
+  ]
+}
