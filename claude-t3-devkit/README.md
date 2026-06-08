@@ -30,6 +30,7 @@ claude-t3-devkit/
 │   └── ship.md
 ├── hooks/hooks.json         # OPTIONAL Slack backstop on review completion
 ├── scripts/notify-slack.sh  # used by the optional hook (needs SLACK_WEBHOOK_URL)
+├── bootstrap.sh             # one-shot terminal scaffolder (create-t3-turbo + settings)
 └── .mcp.json                # Postgres / Slack / Notion MCP servers (fill in packages)
 ```
 
@@ -72,7 +73,7 @@ Both adapt to the **actual** repo layout (never inventing file paths) and finish
 the day-to-day workflow: `/claude-t3-devkit:code-todo` → `/claude-t3-devkit:ship`.
 
 To scaffold from a plain terminal *before* the plugin is installed, the standalone `bootstrap.sh`
-runs the same scaffold + settings step (currently on the `t3-bootstrap` branch):
+runs the same scaffold + settings step:
 
 ```
 ./bootstrap.sh <project-name> <marketplace-repo>   # e.g. ./bootstrap.sh my-app brezzy1337/claude-t3-devkit
