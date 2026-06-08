@@ -23,6 +23,8 @@ claude-t3-devkit/
 │   ├── redundancy-checker.md      security-reviewer.md      pr-author.md
 │   ├── slack-notifier.md          implementer.md            dependency-auditor.md
 ├── commands/                # /claude-t3-devkit:<name>
+│   ├── new-project.md        # scaffold a fresh T3 repo + wire the devkit
+│   ├── add-to-project.md     # wire the devkit into an existing repo
 │   ├── subagent-orchestration.md
 │   ├── code-todo.md
 │   └── ship.md
@@ -50,11 +52,31 @@ the box.
 /plugin install github@claude-plugins-official
 ```
 
-Commands are namespaced: `/claude-t3-devkit:ship`, `/claude-t3-devkit:code-todo`,
-`/claude-t3-devkit:subagent-orchestration`. Run `/reload-plugins` after installing.
+Commands are namespaced: `/claude-t3-devkit:new-project`, `/claude-t3-devkit:add-to-project`,
+`/claude-t3-devkit:ship`, `/claude-t3-devkit:code-todo`, `/claude-t3-devkit:subagent-orchestration`.
+Run `/reload-plugins` after installing.
 
 For zero-touch onboarding, install at **project scope** so it auto-loads for everyone on the repo
 (adds to `.claude/settings.json`).
+
+## Project setup commands
+
+Two commands bootstrap a repo onto the devkit — pick the one that matches your starting point:
+
+| Command | Use it for | What it does |
+|---------|-----------|--------------|
+| `/claude-t3-devkit:new-project <name>` | a brand-new project | Scaffolds a `create-t3-turbo` monorepo (prefers pnpm › bun › npm), writes its `.claude/settings.json` so collaborators pick up this marketplace on folder-trust, then generates a tailored CLAUDE.md orchestration section + `.claude/agents/` specialists. |
+| `/claude-t3-devkit:add-to-project` | a repo you already have | No scaffolding — enables the plugin in the current repo, inspects the real directory layout, and generates a CLAUDE.md orchestration section + agents that fit the existing code. |
+
+Both adapt to the **actual** repo layout (never inventing file paths) and finish by pointing you at
+the day-to-day workflow: `/claude-t3-devkit:code-todo` → `/claude-t3-devkit:ship`.
+
+To scaffold from a plain terminal *before* the plugin is installed, the standalone `bootstrap.sh`
+runs the same scaffold + settings step (currently on the `t3-bootstrap` branch):
+
+```
+./bootstrap.sh <project-name> <marketplace-repo>   # e.g. ./bootstrap.sh my-app brezzy1337/claude-t3-devkit
+```
 
 ## Companion plugins (not bundled — and intentionally so)
 
