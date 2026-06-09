@@ -35,8 +35,9 @@ lives in durable places (the PR body and one Slack thread) so an interrupted run
 
 1. **An entry point** — `.claude/commands/ship.md`, a slash command that runs the pipeline.
 2. **Specialist agents** in `.claude/agents/` — a five-lens review panel (`factual-reviewer`,
-   `architecture-reviewer`, `security-reviewer`, `consistency-reviewer`, `redundancy-checker`)
-   plus the pipeline mechanics `pr-author` and `slack-notifier`. Reuse the baseline's
+   `architecture-reviewer`, `security-reviewer`, `consistency-reviewer`, `redundancy-checker`),
+   two design lenses for UI diffs (`design-reviewer`, `design-foundations-reviewer`), plus the
+   pipeline mechanics `pr-author` and `slack-notifier`. Reuse the baseline's
    `dependency-auditor` in preflight rather than duplicating it.
 3. **A CLAUDE.md "Ship workflow" section** describing the chain, the gates, and where state lives.
 4. **Optional** — a `SubagentStop` Slack hook as a notification backstop (see Step 5).
@@ -125,9 +126,22 @@ output contract, and fan-out reserved for substantive diffs. Keep **`dependency-
 *preflight* rather than the review panel: supply-chain age and advisory checks belong before the
 PR opens, not at review time.
 
-For user-facing changes, the documentation's second set — the UX panel (creative thinker,
-beginner user, designer, marketing analyst, accessibility auditor) — can be added as optional
-agents invoked only on frontend/UX diffs. Keep them off the default code path.
+For user-facing changes, add the **two design lenses** (templates in `assets/`), dispatched only
+when the diff touches the frontend domain globs — keep them off the default code path:
+
+- **`design-reviewer`** — holistic visual judgment on the *rendered* result: hierarchy & rhythm,
+  layout/responsive integrity, contrast in context, motion, print fidelity, and brand feel. It
+  judges screenshots, so the central thread generates them first with the repo's screenshot
+  harness (a `scripts/preview-shots.cjs` template ships with this plugin) and passes the paths in
+  the brief. Worth a stronger model — visual taste is the most judgment-heavy lens on the panel.
+- **`design-foundations-reviewer`** — mechanical, token-precise compliance against the project's
+  design rules file (e.g. `.claude/rules/design.md`): exact palette tokens, type faces/scale,
+  spacing scale, icon/logo rules. If the project has no design rules file, author one — this lens
+  has nothing to measure against without it, and the same file briefs the implementer at creation
+  time so design quality goes in up front instead of arriving as review findings.
+
+The split mirrors the code panel's one-dimension rule: taste and compliance compete for attention
+when one agent holds both, and the mechanical lens stays cheap while the holistic one goes deep.
 
 The two non-review agents are pipeline mechanics, not review lenses, so the panel doesn't replace
 them — keep them just as focused: **`pr-author`** drafts the PR title/body from the diff

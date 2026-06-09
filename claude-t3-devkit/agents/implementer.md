@@ -13,6 +13,12 @@ within those globs. If the change appears to require editing files outside your 
 report it rather than reaching across the boundary — a cross-domain need is a routing decision for
 the central thread, not something you resolve by widening your scope.
 
+**Design at creation time (UI slices).** If your brief assigns the frontend domain, read the
+project's design rules file FIRST (e.g. `.claude/rules/design.md`) and treat it as authoritative
+— colour tokens, type faces and when each is allowed, the spacing scale, icon/logo rules, and any
+design-direction guidance. Build to it from the start; the design review lenses judge against the
+same rulebook, so every deviation you ship comes back as a finding.
+
 When invoked:
 
 1. Read the referenced files and make the scoped change to satisfy the success criteria.

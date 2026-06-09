@@ -22,6 +22,7 @@ claude-t3-devkit/
 │   ├── architecture-reviewer.md   consistency-reviewer.md   factual-reviewer.md
 │   ├── redundancy-checker.md      security-reviewer.md      pr-author.md
 │   ├── slack-notifier.md          implementer.md            dependency-auditor.md
+│   ├── design-reviewer.md         design-foundations-reviewer.md   # UI-diff design lenses
 ├── commands/                # /claude-t3-devkit:<name>
 │   ├── new-project.md        # scaffold a fresh T3 repo + wire the devkit
 │   ├── add-to-project.md     # wire the devkit into an existing repo
@@ -30,6 +31,7 @@ claude-t3-devkit/
 │   └── ship.md
 ├── hooks/hooks.json         # OPTIONAL Slack backstop on review completion
 ├── scripts/notify-slack.sh  # used by the optional hook (needs SLACK_WEBHOOK_URL)
+├── scripts/preview-shots.cjs # screenshot-harness template for the design lenses (copy into repo, edit ROUTES)
 ├── bootstrap.sh             # one-shot terminal scaffolder (create-t3-turbo + settings)
 └── .mcp.json                # Postgres / Slack / Notion MCP servers (fill in packages)
 ```

@@ -11,8 +11,11 @@ Stages and ownership:
   `gh pr create` are not pre-authorized, so they prompt).
 - **Review** — fan out to the read-only panel (`factual-reviewer`, `architecture-reviewer`,
   `security-reviewer`, `consistency-reviewer`, `redundancy-checker`) in parallel, scaled to the
-  diff size. The central thread then consolidates the reports into one prioritized review and
-  posts it to the PR.
+  diff size. For diffs touching UI files, the panel also includes the two design lenses —
+  `design-reviewer` (holistic, judges rendered screenshots) and `design-foundations-reviewer`
+  (token compliance vs the project's design rules file) — briefed with fresh screenshots from the
+  repo's screenshot harness. The central thread then consolidates the reports into one prioritized
+  review and posts it to the PR.
 - **Merge** — **merging requires human approval** (`gh pr merge` is not pre-authorized).
 - **Notify** — `slack-notifier` posts each transition to one Slack thread via the Slack MCP.
 

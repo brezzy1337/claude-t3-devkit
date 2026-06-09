@@ -28,9 +28,14 @@ sub-agents.
 3. **Review (fan-out, then consolidate).** Scale the panel to the diff: for a trivial change run
    one or two lenses or skip; for a substantive change dispatch these read-only lenses in
    parallel — `factual-reviewer`, `architecture-reviewer`, `security-reviewer`,
-   `consistency-reviewer`, `redundancy-checker`. Then consolidate yourself: merge findings,
-   resolve conflicts between lenses, de-duplicate, rank by impact, and post ONE prioritized review
-   to the PR with a single overall verdict. Summarize blocking issues for me.
+   `consistency-reviewer`, `redundancy-checker`. **If the diff touches UI files** (the frontend
+   domain globs in CLAUDE.md), also dispatch the two design lenses — `design-reviewer` (holistic)
+   and `design-foundations-reviewer` (token compliance). Before dispatching them, generate fresh
+   screenshots with the repo's screenshot harness (e.g. `node scripts/preview-shots.cjs`, dev
+   server running) and pass the screenshot paths in both briefs — the design lenses judge rendered
+   pixels, not just markup. Then consolidate yourself: merge findings, resolve conflicts between
+   lenses, de-duplicate, rank by impact, and post ONE prioritized review to the PR with a single
+   overall verdict. Summarize blocking issues for me.
 
 4. **GATE 2 — do not merge.** Show me the consolidated review and your merge recommendation and
    wait for my explicit "yes". `gh pr merge` is not pre-authorized and will prompt — only proceed

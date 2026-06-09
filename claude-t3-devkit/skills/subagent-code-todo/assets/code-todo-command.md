@@ -34,14 +34,26 @@ do the handoff yourself.
    bumped dependency, route it through the `dependency-auditor` sub-agent first and stop on a
    NO-GO. Stop on red: if implementation or tests fail and can't be fixed, halt and report.
 
-5. **Commit, then review on Slack — GATE.** Once the slices are in and tests pass, commit the work
-   to the branch. Run `git diff` against the base, summarize what changed, and delegate to
-   `slack-notifier` to post the summary + branch name to the team thread for review. Then STOP and
-   wait for my explicit "yes" here in the terminal. Slack is where I read the diff; I approve back
-   in this session — do not poll Slack for a reply. If I request changes, re-brief the
-   implementer, update the branch, and re-post.
+5. **Design iteration (UI slices only).** Design rarely lands in one pass — close the loop
+   yourself BEFORE the human gate. If the slice touched the frontend domain globs:
+   - Start the dev server and generate screenshots with the repo's screenshot harness
+     (e.g. `node scripts/preview-shots.cjs`); output lands in `preview-shots/`.
+   - Dispatch BOTH design lenses in parallel with the screenshot paths in their briefs:
+     `design-reviewer` (holistic hierarchy/brand-feel/responsive/print) and
+     `design-foundations-reviewer` (token-precise compliance vs the project's design rules file).
+   - Re-brief the implementer on every Critical and Warning finding, re-shoot, and re-run the
+     lenses until both verdicts are clean (cap at two fix cycles — if still red, surface the
+     remaining findings at the gate instead of looping forever).
 
-6. **Hand off to /ship.** Only after I approve: run `/ship` on this branch. `/ship` owns PR
+6. **Commit, then review on Slack — GATE.** Once the slices are in and tests pass, commit the work
+   to the branch. Run `git diff` against the base, summarize what changed, and delegate to
+   `slack-notifier` to post the summary + branch name to the team thread for review. For a UI
+   slice, attach one or two of the freshest screenshots so the approval judges a rendered design,
+   not a text diff. Then STOP and wait for my explicit "yes" here in the terminal. Slack is where
+   I read the diff; I approve back in this session — do not poll Slack for a reply. If I request
+   changes, re-brief the implementer, update the branch, and re-post.
+
+7. **Hand off to /ship.** Only after I approve: run `/ship` on this branch. `/ship` owns PR
    creation, the multi-lens review panel, the merge gate, and PR notifications — do NOT open a PR,
    push, or merge here (those tools are intentionally not available to this command). If `/ship`
    isn't installed, stop and tell me the branch is ready to open a PR by hand.
