@@ -96,7 +96,7 @@ skills/agents/commands plus MCP server references.
   server you don't want).
 - Provide credentials via environment variables — each teammate supplies their own:
   - `DATABASE_URL` (Postgres / RDS)
-  - `SLACK_BOT_TOKEN`, `SLACK_TEAM_ID` (so ship can post to #proj-wholesum)
+  - `SLACK_BOT_TOKEN`, `SLACK_TEAM_ID` (so ship can post to #project)
   - `NOTION_TOKEN` (so workflows can read the Architecture / Development pages)
 
 ## Optional Slack hook
