@@ -41,11 +41,26 @@ target repo). The files in `agents/` and `commands/` are the live, ready-to-run 
 intentionally included: the skills let you regenerate/customize, the agents/commands work out of
 the box.
 
-## Install (team)
+## Install
+
+**Prerequisites:** [Claude Code](https://docs.anthropic.com/claude-code) installed and authenticated
+(`claude` runs from your terminal). All commands below are typed inside an interactive `claude` session.
+
+### Try it locally first (no marketplace needed)
+
+Clone the repo and point Claude Code at the plugin directory — fastest way to kick the tires:
+
+```
+git clone https://github.com/brezzy1337/claude-t3-devkit.git
+claude --plugin-dir ./claude-t3-devkit/claude-t3-devkit
+/reload-plugins
+```
+
+### Install from the marketplace (team)
 
 ```
 # 1. add this marketplace (once per machine)
-/plugin marketplace add your-org/claude-t3-devkit
+/plugin marketplace add brezzy1337/claude-t3-devkit
 
 # 2. install the plugin
 /plugin install claude-t3-devkit@claude-t3-devkit
@@ -55,9 +70,9 @@ the box.
 /plugin install github@claude-plugins-official
 ```
 
-Commands are namespaced: `/claude-t3-devkit:new-project`, `/claude-t3-devkit:add-to-project`,
-`/claude-t3-devkit:ship`, `/claude-t3-devkit:code-todo`, `/claude-t3-devkit:subagent-orchestration`.
-Run `/reload-plugins` after installing.
+Run `/reload-plugins` after installing. Commands are namespaced:
+`/claude-t3-devkit:new-project`, `/claude-t3-devkit:add-to-project`, `/claude-t3-devkit:ship`,
+`/claude-t3-devkit:code-todo`, `/claude-t3-devkit:subagent-orchestration`.
 
 For zero-touch onboarding, install at **project scope** so it auto-loads for everyone on the repo
 (adds to `.claude/settings.json`).
