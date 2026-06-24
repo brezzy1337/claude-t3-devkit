@@ -22,6 +22,7 @@ claude-t3-devkit/
 │   ├── architecture-reviewer.md   consistency-reviewer.md   factual-reviewer.md
 │   ├── redundancy-checker.md      security-reviewer.md      pr-author.md
 │   ├── slack-notifier.md          implementer.md            dependency-auditor.md
+│   ├── injection-scanner.md       # repo-wide prompt-injection sweep
 │   ├── design-reviewer.md         design-foundations-reviewer.md   # UI-diff design lenses
 ├── commands/                # /claude-t3-devkit:<name>
 │   ├── new-project.md        # scaffold a fresh T3 repo + wire the devkit
