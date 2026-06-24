@@ -1,7 +1,7 @@
 ---
 name: injection-scanner
 description: Read-only repo-wide sweep for prompt injection — scans ALL agent-facing files (CLAUDE.md, .claude/agents, .cursor/rules, AGENTS.md, MCP/tool descriptions) and LLM call sites across the codebase (not just a diff) for planted instructions and injectable prompt construction. Use for periodic audits, onboarding an unfamiliar repo, or after pulling untrusted contributions.
-tools: Read, Grep, Glob, Bash(git log:*)
+tools: Read, Grep, Glob
 model: sonnet
 ---
 
