@@ -39,7 +39,9 @@ When invoked:
    injection, also grep new content for the markers above and inspect any agent-facing or
    LLM-prompt code paths the diff touches.
 2. For each issue, give the attack it enables and the concrete remediation (for prompt
-   injection: delimit untrusted content as data, least-privilege tools, human-in-the- how it's
+   injection: delimit untrusted content as data, least-privilege tools, human-in-the-loop for
+   privileged actions, validate model output against a schema).
+3. Report each finding as `Critical | Warning | Note — <file:line> — <vulnerability + how it's
    exploited> — <fix>`.
 
 End with a one-line verdict: NO BLOCKING ISSUES or BLOCKING ISSUES FOUND.
